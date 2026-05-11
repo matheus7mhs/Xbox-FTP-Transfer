@@ -5,8 +5,8 @@ O **Xbox-FTP-Transfer** foi projetado no AndroidIDE para realizar transferência
 O aplicativo vai muito além de um cliente FTP comum, possuindo uma lógica inteligente focada especificamente na estrutura de arquivos do Xbox.
 ## 📸 Screenshots do Aplicativo
 <p align="center">
-  <img src="images/tela_inicial.jpg" width="300" alt="Tela Inicial">
-  <img src="images/stela_de_instalados.jpg" width="300" alt="Tela de Instalados">
+  <img src="tela_inicial.jpg" width="300" alt="Tela Inicial">
+  <img src="stela_de_instalados.jpg" width="300" alt="Tela de Instalados">
 </p>
 
 ### 🚀 Principais Funcionalidades
