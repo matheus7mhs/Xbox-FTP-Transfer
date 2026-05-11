@@ -3,6 +3,11 @@
 O **Xbox-FTP-Transfer** foi projetado no AndroidIDE para realizar transferências FTP robustas e diretas do seu celular Android para o Xbox 360 (RGH/JTAG), otimizando a forma como você gerencia e instala seus jogos.
 
 O aplicativo vai muito além de um cliente FTP comum, possuindo uma lógica inteligente focada especificamente na estrutura de arquivos do Xbox.
+## 📸 Screenshots do Aplicativo
+<p align="center">
+  <img src="images/screenshot1.jpg" width="300" alt="Tela Inicial">
+  <img src="images/screenshot2.jpg" width="300" alt="Conexão FTP">
+</p>
 
 ### 🚀 Principais Funcionalidades
 
