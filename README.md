@@ -9,6 +9,11 @@ O aplicativo vai muito além de um cliente FTP comum, possuindo uma lógica inte
   <img src="tela_inicial.jpg" width="300" alt="Tela Inicial">
   Tela de Jogos Instalados 
   <img src="tela_de_instalados.jpg" width="300" alt="Tela de Instalados">
+    <img src="tela_de_instalados2.jpg" width="300" alt="Tela de Instalados">
+  Informação de ID e armazenamento
+ <img src="tela_id.jpg" width="300" alt="Tela de Instalados">  
+  Tela de Transferência
+  <img src="tela_inicial2.jpg" width="300" alt="Tela de Iniciar">
 </p>
 
 ### 🚀 Principais Funcionalidades
