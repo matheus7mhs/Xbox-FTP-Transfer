@@ -1,5 +1,5 @@
 Privacy Policy
-​Last Updated: Fri 3, 2026
+​Last Updated: July 3, 2026
 ​This Privacy Policy describes how the FTP Transfer application handles your device's permissions and data. The core focus of this application is the transparency and security of your information.
 ​
 1. Requested Permissions and Their Purposes
