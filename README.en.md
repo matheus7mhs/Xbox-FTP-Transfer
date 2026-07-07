@@ -1,3 +1,4 @@
+[⬅️ Voltar para o início](README.md)
 ## ⚙️ How does Xbox-FTP-Transfer work?
 
 **Xbox-FTP-Transfer** was designed inside AndroidIDE to perform robust and direct FTP transfers from your Android phone to the Xbox 360 (RGH/JTAG), optimizing how you manage and install your games.
@@ -43,3 +44,8 @@ The app goes far beyond a common FTP client, featuring a smart logic tailored sp
    > The default **username and password** is usually **xbox**.
 3. Select the game folder (GOD or XEX) from your Android storage.
 4. Start the transfer and track the progress and game covers being managed by the system in real time until you hear the completion audio alert!
+
+* <img src="1783441269687.png" width="20" alt="icon"> [Releases](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
+* <img src="1783441173268.png" width="20" alt="icon"> [ApkPure](https://apkpure.com/developer?id=1042847)
+
+  [⬅️ Voltar para o início](README.md)
