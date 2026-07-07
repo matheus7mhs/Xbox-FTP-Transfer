@@ -3,7 +3,8 @@ Select your language / Selecione o seu idioma:
 * 🇺🇸 [English](README.en.md)
 * 🇪🇸 [Español](README.es.md)
 
-
+* <img src="1783441269687.png" width="20" alt="icon"> [Releases](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
+* <img src="1783441173268.png" width="20" alt="icon"> [ApkPure](https://apkpure.com/developer?id=1042847)
 ---
 
 <p align="center">
@@ -48,3 +49,6 @@ Tela Inicial
 //**usuário e senha: Xbox** e o padrão
 3. Selecione a pasta do jogo (GOD ou XEX) no seu armazenamento Android.
 4. Inicie a transferência e acompanhe o progresso e as capas sendo gerenciadas pelo sistema em tempo real, até o aviso sonoro de conclusão!
+   
+* <img src="1783441269687.png" width="20" alt="icon"> [Releases](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
+* <img src="1783441173268.png" width="20" alt="icon"> [ApkPure](https://apkpure.com/developer?id=1042847)
