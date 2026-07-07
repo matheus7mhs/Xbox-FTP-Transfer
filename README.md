@@ -1,3 +1,12 @@
+Select your language / Selecione o seu idioma:
+
+* 🇺🇸 [English](README.en.md)
+* 🇪🇸 [Español](README.es.md)
+
+
+---
+
+<p align="center">
 ## ⚙️ Como o Xbox-FTP-Transfer funciona?
 
 O **Xbox-FTP-Transfer** foi projetado no AndroidIDE para realizar transferências FTP robustas e diretas do seu celular Android para o Xbox 360 (RGH/JTAG), otimizando a forma como você gerencia e instala seus jogos.
