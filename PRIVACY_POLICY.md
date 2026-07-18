@@ -14,4 +14,4 @@
 ​Esta política pode ser atualizada se novas funções forem adicionadas. Recomendamos a consulta periódica desta página.
 ​4. Contato
 ​Dúvidas sobre a privacidade ou funcionamento do app podem ser enviadas através do repositório oficial:
-GitHub: https://github.com/matheus7mhs/XBOXFTP
+GitHub:https://github.com/matheus7mhs/Xbox-FTP-Transfer
