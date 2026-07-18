@@ -19,4 +19,4 @@ Privacy Policy
 ​
 4. Contact
 ​If you have any questions regarding privacy or how the app functions, please reach out through the official repository:
-​GitHub: https://github.com/matheus7mhs/XBOXFTP
+​GitHub: https://github.com/matheus7mhs/Xbox-FTP-Transfer
