@@ -45,4 +45,13 @@ La aplicación va mucho más allá de un cliente FTP común, ya que cuenta con u
    > El **usuario y contraseña** predeterminado es **xbox**.
 3. Selecciona la carpeta del juego (GOD o XEX) desde el almacenamiento de tu Android.
 4. ¡Inicia la transferencia y sigue el progreso y las portadas gestionadas por el sistema en tiempo real hasta que escuches la alerta sonora de finalización!
+
+---
+¿Prefieres transferir juegos a través de USB? Echa un vistazo a **[My 360 Storage](https://github.com/matheus7mhs/My-360-Storage)**: ¡una aplicación alternativa que utiliza el USB de tu teléfono celular!
+* <img src="1783441269687.png" width="20" alt="icon"> [Alternativa USB](https://github.com/matheus7mhs/My-360-Storage)
+---
+### 📥 Download
+
+* <img src="1783441269687.png" width="20" alt="icon"> [Releases do GitHub](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
+* <img src="1783441173268.png" width="20" alt="icon"> [Baixar no ApkPure](https://apkpure.com/developer?id=1042847)
 [⬅️ Voltar para o início](README.md)
