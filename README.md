@@ -51,7 +51,9 @@ Desenvolvido no AndroidIDE, o aplicativo vai muito além de um cliente FTP comum
 3. No aplicativo, insira o **IP local** do console e as credenciais de rede (**usuário e senha**).
 4. Selecione a pasta do jogo (GOD ou XEX), DLC ou arquivo no armazenamento do seu Android.
 5. Inicie a transferência! Acompanhe o progresso em tempo real e deixe que o sistema faça o roteamento para as pastas certas automaticamente.
-
+---
+Prefere transferir jogos por USB? Confira o **[My 360 Storage](https://github.com/matheus7mhs/My-360-Storage)**-um app alternativo que usa o USB do celular!
+* <img src="1783441269687.png" width="20" alt="icon"> [Alternativa USB](https://github.com/matheus7mhs/My-360-Storage)
 ---
 ### 📥 Download
 
