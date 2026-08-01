@@ -63,5 +63,14 @@ Prefere transferir jogos por USB? Confira o **[My 360 Storage](https://github.co
 ---
 <details>
 <summary><b>🔍 Tags de Pesquisa (SEO)</b></summary>
-<p>Xbox 360 FTP client, enviar jogos Xbox 360 pelo celular Android, transferir jogos Xbox RGH JTAG sem PC, FTP Android to Xbox 360, instalar DLC Xbox 360 celular, Aurora dashboard FTP transfer, XexMenu FTP, transfer Xbox 360 games via WiFi, Xbox-FTP-Transfer apk.</p>
+<p>Xbox 360 FTP client, enviar jogos Xbox 360 pelo celular Android, transferir jogos Xbox RGH JTAG sem PC, FTP Android to Xbox 360, instalar DLC Xbox 360 celular, Aurora dashboard FTP transfer, XexMenu FTP, transfer Xbox 360 games via WiFi, Xbox FTP Transfer apk, transferir jogos celular para xbox 360 aurora,How to transfer RGH Xbox 360 games using a smartphone without a PC, apkpure, Xbox FTP Transfer no apkpure.</p>
 </details>
+<!--
+SEO keywords (hidden from rendered view, read by search engine crawlers):
+Xbox 360, Android, GOD format, XBLA, XEX, game manager, DLC installer, save manager,
+Xbox 360 games, USB flash drive, external HDD, Xbox 360 content, title update, game backup,
+Xbox 360 folder structure, Games on Demand, Xbox Live Arcade, XEX games, USB manager,
+Xbox 360 Android, OTG cable, Xbox 360 save transfer, manage Xbox 360 client ftp, My 360 Storage, Xbox FTP Transfer, como enviar jogos para o xbox 360 via ftp pelo celular, passar jogos de xbox 360 pelo celular sem pc, transferir jogos celular para xbox 360 aurora,
+gerenciador de jogos Xbox 360, gestor de juegos Xbox 360, pendrive Xbox 360, memoria USB Xbox 360, como passar jogos pro Xbox pelo celular, #xbox360, #xboxrgh, Como transferir arquivos do celular para o Xbox 360 via FTP, Como colocar jogos no Xbox 360 com celular, How to transfer RGH Xbox 360 games using a smartphone without a PC,
+-->
+
