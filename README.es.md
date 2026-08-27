@@ -53,5 +53,6 @@ La aplicación va mucho más allá de un cliente FTP común, ya que cuenta con u
 ### 📥 Download
 
 * <img src="1783441269687.png" width="20" alt="icon"> [Releases do GitHub](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
-* <img src="1783441173268.png" width="20" alt="icon"> [Baixar no ApkPure](https://apkpure.com/developer?id=1042847)
+* <img src="1783441173268.png" width="20" alt="icon"> [Baixar no ApkPure](https://apkpure.com/xbox-ftp-transfer-rgh-jtag/mhs.ftp.meuxbox1)
+  
 [⬅️ Voltar para o início](README.md)
