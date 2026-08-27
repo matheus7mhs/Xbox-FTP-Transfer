@@ -5,7 +5,7 @@ Select your language / Selecione o seu idioma:
 * 🇪🇸 [Español](README.es.md)
 
 * <img src="1783441269687.png" width="20" alt="icon"> [Releases](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
-* <img src="1783441173268.png" width="20" alt="icon"> [ApkPure](https://apkpure.com/developer?id=1042847)
+* <img src="1783441173268.png" width="20" alt="icon"> [ApkPure](https://apkpure.com/xbox-ftp-transfer-rgh-jtag/mhs.ftp.meuxbox1)
 ---
 
 <p align="center">
@@ -58,7 +58,7 @@ Prefere transferir jogos por USB? Confira o **[My 360 Storage](https://github.co
 ### 📥 Download
 
 * <img src="1783441269687.png" width="20" alt="icon"> [Releases do GitHub](https://github.com/matheus7mhs/Xbox-FTP-Transfer/releases)
-* <img src="1783441173268.png" width="20" alt="icon"> [Baixar no ApkPure](https://apkpure.com/developer?id=1042847)
+* <img src="1783441173268.png" width="20" alt="icon"> [Baixar no ApkPure](https://apkpure.com/xbox-ftp-transfer-rgh-jtag/mhs.ftp.meuxbox1)
 
 ---
 <details>
