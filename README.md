@@ -1,3 +1,344 @@
+<!--
+# Xbox FTP Transfer 9.1
+
+Aplicativo Android para transferir, organizar e gerenciar jogos em consoles **Xbox 360 RGH/JTAG** por FTP, usando a rede local. O projeto foi desenvolvido em Java/XML para facilitar o uso pelo celular, sem precisar remover o armazenamento do console.
+
+> **Atenção:** este aplicativo não é um cliente USB OTG. A comunicação com o Xbox 360 é feita por FTP através da rede local. O Xbox precisa estar ligado, com um servidor FTP ativo — por exemplo, pelo Aurora, XeXMenu ou outra solução compatível.
+
+## Sobre o projeto
+
+O Xbox FTP Transfer simplifica tarefas que normalmente exigem um computador:
+
+- enviar jogos para o HD interno ou dispositivos USB conectados ao Xbox;
+- reconhecer automaticamente jogos XEX, GOD e XBLA;
+- acompanhar o progresso de arquivos grandes;
+- continuar o envio mesmo quando o aplicativo é minimizado;
+- consultar a biblioteca instalada no Xbox;
+- visualizar Title ID, nome, capa, localização e tamanho dos jogos;
+- consultar DLCs, saves e Title Updates;
+- remover jogos e conteúdos diretamente pelo FTP.
+
+## Principais recursos
+
+### Transferência de jogos
+
+- Conexão FTP configurável por IP, usuário, senha e porta.
+- Suporte aos destinos `Hdd1`, `Usb0` e `Usb1`, quando disponíveis.
+- Seleção da pasta de origem usando o seletor oficial de documentos do Android.
+- Detecção de conteúdo XEX através do arquivo `default.xex`.
+- Instalação de conteúdo XEX em `Games` ou `Apps`.
+- Transferência de jogos GOD/STFS para a estrutura correta de `Content`.
+- Verificação do tamanho remoto antes do envio.
+- Arquivos que já possuem o mesmo tamanho podem ser ignorados, reduzindo o tempo de transferência.
+- Substituição de arquivos incompletos ou com tamanho diferente.
+
+### Fila e execução em segundo plano
+
+- Fila para enviar vários jogos em sequência.
+- Foreground Service do Android para manter a transferência ativa em segundo plano.
+- Notificação persistente com progresso total.
+- Progresso do arquivo atual e da transferência completa.
+- Pausar e retomar o envio.
+- Cancelar o arquivo atual e limpar a fila pendente.
+- Reconexão automática em caso de instabilidade da rede.
+- Até 60 tentativas consecutivas antes de informar falha definitiva.
+
+### Reinício remoto do Aurora
+
+Quando a conexão falha repetidamente, o aplicativo pode detectar que o Aurora provavelmente parou de responder e oferecer um reinício remoto.
+
+O usuário pode escolher:
+
+- reiniciar o Aurora uma única vez;
+- ativar o reinício automático em falhas futuras;
+- recusar o reinício.
+
+A comunicação com a interface web do Aurora é feita por uma `WebView`. Após o reinício, o aplicativo aguarda o console voltar a responder e tenta continuar o envio.
+
+### Biblioteca de jogos
+
+A tela **Meus Jogos** escaneia os armazenamentos do Xbox:
+
+- `Hdd1`;
+- `Usb0`;
+- `Usb1`;
+- `Usb2`.
+
+O catálogo identifica:
+
+- jogos GOD em `00007000`;
+- jogos XBLA/Arcade em `000D0000` e `000D0001`;
+- jogos XEX em pastas contendo `default.xex`.
+
+A biblioteca exibe:
+
+- nome do jogo;
+- Title ID;
+- tipo do jogo;
+- caminho no Xbox;
+- capa;
+- tamanho total;
+- DLCs;
+- saves;
+- Title Updates.
+
+O resultado do escaneamento é salvo em cache por endereço IP para permitir uma abertura mais rápida da biblioteca.
+
+### Gerenciamento remoto
+
+Pelo diálogo de detalhes é possível:
+
+- consultar a localização do jogo;
+- calcular o tamanho total do jogo e conteúdos associados;
+- listar DLC, saves e Title Updates;
+- remover apenas o jogo;
+- remover o jogo junto com DLC, saves e Title Updates.
+
+A exclusão é permanente no armazenamento do Xbox e deve ser usada com cuidado.
+
+### Capas e nomes
+
+- Identificação de jogos por Title ID.
+- Banco local `jogos.csv` para converter Title IDs conhecidos em nomes.
+- Cache local de capas para reduzir downloads repetidos.
+- Redução da resolução das imagens antes de carregá-las na memória.
+- Compatibilidade com múltiplos idiomas.
+
+## Novidades da versão 9.1
+
+A versão 9.1 representa uma evolução significativa em relação à versão anterior, que tinha como foco principal a conexão FTP e o envio básico de arquivos.
+
+### 1. Serviço de transferência dedicado
+
+A transferência foi separada da tela principal em `TransferService`. Isso permite:
+
+- manter o envio ativo com o aplicativo minimizado;
+- exibir notificação de progresso;
+- separar a interface da lógica de rede;
+- reconectar sem depender diretamente do ciclo de vida da Activity.
+
+### 2. Fila de múltiplos jogos
+
+Nas versões anteriores, o fluxo era mais limitado a uma transferência por vez. A 9.1 adiciona uma fila que recebe vários jogos e envia cada um automaticamente após a conclusão do anterior.
+
+### 3. Pausar, retomar e cancelar
+
+Foram adicionados controles para:
+
+- pausar a leitura do arquivo atual;
+- retomar o envio de onde estava;
+- cancelar a transferência em andamento;
+- limpar os jogos que ainda estavam aguardando na fila.
+
+### 4. Reconexão automática mais resistente
+
+O envio passou a lidar melhor com redes Wi-Fi instáveis e quedas de conexão do Xbox. O aplicativo:
+
+- mantém o índice do arquivo/tarefa atual;
+- reconecta ao servidor FTP;
+- continua a partir da tarefa que falhou;
+- limita o número de tentativas;
+- exibe o contador de reconexões na interface.
+
+### 5. Reinício remoto do Aurora
+
+A 9.1 adiciona a possibilidade de reiniciar o Aurora remotamente quando ele deixa de responder durante uma transferência. O usuário pode autorizar a ação manualmente ou ativar o modo automático.
+
+### 6. Verificação inteligente de arquivos
+
+Antes de enviar um arquivo, o aplicativo consulta o tamanho existente no Xbox. Se o tamanho remoto for igual ao tamanho local, o envio é ignorado. Isso evita transferências desnecessárias depois de uma interrupção ou ao repetir uma operação.
+
+### 7. Suporte ampliado a GOD, XEX e XBLA
+
+O reconhecimento deixou de se concentrar apenas em pastas XEX. A biblioteca agora diferencia:
+
+- XEX;
+- GOD;
+- XBLA/Arcade;
+- pacotes STFS com cabeçalhos `CON `, `PIRS` e `LIVE`.
+
+Também foi incluída leitura de cabeçalho STFS por FTP para catalogar jogos XBLA sem precisar baixar o pacote inteiro para o celular.
+
+### 8. Nova biblioteca de jogos instalada
+
+Foi adicionada uma tela dedicada para escanear os jogos instalados no Xbox. Ela usa `GameDatabase`, `GameCache`, `GameAdapter` e `MeusJogosFragment` para montar uma biblioteca navegável.
+
+### 9. Cálculo de tamanho e conteúdos extras
+
+A versão 9.1 passou a calcular separadamente:
+
+- tamanho do jogo principal;
+- DLC;
+- saves públicos e de perfis;
+- Title Updates.
+
+Também permite listar esses conteúdos antes de uma eventual desinstalação.
+
+### 10. Desinstalação remota
+
+Foi adicionado o gerenciamento de exclusão via FTP, com duas opções:
+
+- remover somente o jogo;
+- remover o jogo, DLC, saves e Title Updates.
+
+### 11. Cache de catálogo e imagens
+
+A biblioteca salva o resultado do escaneamento por IP e mantém capas em cache. Isso diminui o tempo de abertura e reduz a quantidade de requisições à rede.
+
+### 12. Interface e internacionalização
+
+A interface foi ampliada com:
+
+- tela de biblioteca;
+- diálogos de detalhes;
+- configuração FTP e Aurora;
+- tutorial inicial;
+- créditos;
+- botões de pausa, retomada e cancelamento;
+- layouts responsivos para telas maiores;
+- suporte a vários idiomas;
+- tema claro/escuro.
+
+### 13. Atualização da base Android
+
+O projeto atual utiliza:
+
+- Android Gradle Plugin 8.11.0;
+- Gradle 8.13;
+- Java 17;
+- `compileSdk 36`;
+- `targetSdk 36`;
+- `minSdk 24`;
+- View Binding;
+- AndroidX DocumentFile, RecyclerView, CardView e Material Components.
+
+## Comparação resumida
+
+| Área | Versões anteriores | Xbox FTP Transfer 9.1 |
+|---|---|---|
+| Transferência | Envio FTP básico | Serviço dedicado com fila e foreground service |
+| Jogos | Fluxo mais simples | XEX, GOD, STFS e XBLA |
+| Execução | Mais dependente da tela aberta | Continua em segundo plano com notificação |
+| Falhas de rede | Recuperação limitada | Reconexão automática com limite de tentativas |
+| Controle | Início da transferência | Iniciar, pausar, retomar e cancelar |
+| Arquivos repetidos | Reenvio possível | Verificação de tamanho remoto |
+| Aurora | Sem automação integrada | Reinício remoto opcional |
+| Biblioteca | Não disponível ou limitada | Catálogo remoto de jogos instalados |
+| Identificação | Nome da pasta/arquivo | Title ID, banco local e cabeçalho STFS/XEX |
+| XBLA | Não catalogado de forma dedicada | Detecção em `000D0000` e `000D0001` |
+| Conteúdo extra | Não detalhado | DLC, saves e Title Updates |
+| Desinstalação | Não disponível | Remoção do jogo ou dos extras por FTP |
+| Cache | Limitado | Cache de catálogo por IP e cache de capas |
+| Interface | Tela de transferência | Transferência, biblioteca, detalhes, configurações e tutorial |
+| Idiomas | Mais limitado | Vários arquivos de tradução incluídos |
+
+## Requisitos
+
+### No Xbox 360
+
+- Xbox 360 com RGH/JTAG ou configuração compatível;
+- Aurora, XeXMenu ou outro servidor FTP ativo;
+- IP acessível pela rede local;
+- usuário, senha e porta FTP configurados;
+- espaço livre no destino escolhido.
+
+### No Android
+
+- Android 7.0 ou superior, devido ao `minSdk 24`;
+- conexão na mesma rede do Xbox;
+- permissão para notificações no Android 13 ou superior;
+- desativação da otimização de bateria para o aplicativo, recomendada para transferências longas.
+
+## Como usar
+
+1. Abra o servidor FTP no Xbox.
+2. Anote o IP exibido pelo Aurora ou XeXMenu.
+3. Abra o Xbox FTP Transfer.
+4. Informe o IP do Xbox.
+5. Toque em **Testar Conexão**.
+6. Configure usuário, senha e porta, se forem diferentes do padrão.
+7. Escolha `Hdd1`, `Usb0` ou `Usb1`.
+8. Toque em **Selecionar Pasta**.
+9. Escolha a pasta raiz do jogo no armazenamento do Android.
+10. Se for XEX, escolha o destino `Games` ou `Apps`.
+11. Acompanhe o envio pela tela ou pela notificação.
+12. Para consultar jogos instalados, abra **Meus Jogos** e toque em **Escanear Xbox**.
+
+## Compilação no Android Studio
+
+O projeto é um projeto Android Gradle com módulo `app`.
+
+### Pré-requisitos
+
+- Android Studio atualizado;
+- JDK 17;
+- Android SDK Platform 36;
+- Build-Tools compatível;
+- acesso à internet para baixar dependências Gradle.
+
+### Abrir o projeto
+
+1. Extraia o projeto.
+2. Abra no Android Studio a pasta que contém `settings.gradle`.
+3. Não abra somente a pasta `app`.
+4. Configure o Gradle para utilizar JDK 17.
+5. Instale a API 36 pelo SDK Manager.
+6. Sincronize o projeto.
+7. Execute **Build > Make Project**.
+
+Comando pelo terminal:
+
+```bash
+chmod +x gradlew
+./gradlew :app:assembleDebug
+```
+
+O APK de debug será criado em:
+
+```text
+app/build/outputs/apk/debug/app-debug.apk
+```
+
+## Segurança e limitações
+
+- FTP e HTTP podem transmitir credenciais sem criptografia, dependendo da configuração do Xbox e do Aurora.
+- As credenciais são salvas nas preferências do aplicativo e devem ser protegidas em futuras versões.
+- A opção de reinício remoto depende da estrutura HTML e da API web do Aurora.
+- A fila atual fica em memória; se o Android encerrar o processo, a fila pode ser perdida.
+- A desinstalação remove arquivos permanentemente do Xbox.
+- Capas e nomes podem depender de serviços externos.
+- O projeto deve ser testado com uma cópia de segurança antes de utilizar a exclusão remota.
+
+## Estado do projeto
+
+- **Versão do aplicativo:** 9.1
+- **Código da versão:** 9
+- **Plataforma:** Android
+- **Linguagem:** Java/XML
+- **Licença:** defina a licença antes de publicar o repositório
+- **Status:** desenvolvimento/uso experimental
+
+O ZIP recebido possui o nome `meuXboxin_10.3.zip`, mas o Gradle declara `versionName "9.1"` e `versionCode 9`. Recomenda-se alinhar o nome do arquivo, a versão do Gradle, o changelog e as tags do Git antes da publicação.
+
+## Contribuição
+
+Contribuições são bem-vindas. Antes de abrir um pull request:
+
+1. teste a conexão com um Xbox real;
+2. valide transferências XEX, GOD e XBLA;
+3. teste rede instável;
+4. teste pausa, retomada e cancelamento;
+5. não inclua `local.properties`, APKs, senhas ou dados pessoais;
+6. documente qualquer alteração no protocolo FTP ou no comportamento do Aurora.
+
+## Créditos
+
+- **Desenvolvedor:** Matheus Andrade
+- **Banco de IDs e ícones:** XboxUnity.net
+- **Banco de capas:** Archive.org
+- **Ferramentas de apoio:** Gemini AI e Claude
+- **Ambiente de desenvolvimento original:** AndroidIDE/Code On The Go
+-->
 # XBOX FTP TRANSFER - Cliente FTP Android para Xbox 360 (RGH/JTAG/Exploit) 🎮📱
 
 Select your language / Selecione o seu idioma:
