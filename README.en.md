@@ -1,3 +1,344 @@
+<!--
+# Xbox FTP Transfer 9.1
+
+An Android application for transferring, organizing, and managing games on **Xbox 360 RGH/JTAG** consoles over FTP using the local network. The project was developed in Java/XML to make mobile use easier, without having to remove the console's storage device.
+
+> **Important:** this application is not a USB OTG client. Communication with the Xbox 360 is performed over FTP through the local network. The Xbox must be powered on with an active FTP server, such as Aurora, XeXMenu, or another compatible solution.
+
+## About the project
+
+Xbox FTP Transfer simplifies tasks that would normally require a computer:
+
+- upload games to the internal hard drive or USB devices connected to the Xbox;
+- automatically recognize XEX, GOD, and XBLA games;
+- monitor the progress of large files;
+- continue uploading when the application is minimized;
+- browse the game library installed on the Xbox;
+- view the Title ID, name, cover, location, and size of games;
+- inspect DLC, saves, and Title Updates;
+- remove games and content directly over FTP.
+
+## Main features
+
+### Game transfer
+
+- FTP connection configurable by IP address, username, password, and port.
+- Support for the `Hdd1`, `Usb0`, and `Usb1` destinations when available.
+- Local source-folder selection using Android's official document picker.
+- XEX content detection through the `default.xex` file.
+- Installation of XEX content into `Games` or `Apps`.
+- Transfer of GOD/STFS games to the correct `Content` structure.
+- Remote-size verification before uploading.
+- Files with the same remote and local size can be skipped, reducing transfer time.
+- Replacement of incomplete or differently sized files.
+
+### Queue and background execution
+
+- Queue for uploading multiple games in sequence.
+- Android foreground service keeps transfers active in the background.
+- Persistent notification with total progress.
+- Progress for the current file and the complete transfer.
+- Pause and resume controls.
+- Cancel the current file and clear the pending queue.
+- Automatic reconnection when the network becomes unstable.
+- Up to 60 consecutive attempts before reporting a definitive failure.
+
+### Remote Aurora restart
+
+When the connection repeatedly fails, the application can detect that Aurora may have stopped responding and offer a remote restart.
+
+The user can choose to:
+
+- restart Aurora once;
+- enable automatic restarts for future failures;
+- decline the restart.
+
+Communication with Aurora's web interface is performed through a `WebView`. After the restart, the application waits for the console to respond again and attempts to continue the upload.
+
+### Game library
+
+The **My Games** screen scans the following Xbox storage locations:
+
+- `Hdd1`;
+- `Usb0`;
+- `Usb1`;
+- `Usb2`.
+
+The catalog identifies:
+
+- GOD games in `00007000`;
+- XBLA/Arcade games in `000D0000` and `000D0001`;
+- XEX games in folders containing `default.xex`.
+
+The library displays:
+
+- game name;
+- Title ID;
+- game type;
+- Xbox path;
+- cover art;
+- total size;
+- DLC;
+- saves;
+- Title Updates.
+
+Scan results are cached by IP address to make the library open faster the next time.
+
+### Remote management
+
+From the details dialog, users can:
+
+- view the game's location;
+- calculate the total size of the game and associated content;
+- list DLC, saves, and Title Updates;
+- remove only the game;
+- remove the game together with its DLC, saves, and Title Updates.
+
+Deletion is permanent on the Xbox storage and must be used carefully.
+
+### Covers and game names
+
+- Game identification through Title IDs.
+- Local `jogos.csv` database to convert known Title IDs into game names.
+- Local cover cache to reduce repeated downloads.
+- Image downscaling before loading images into memory.
+- Support for multiple languages.
+
+## What's new in version 9.1
+
+Version 9.1 is a significant evolution from the previous version, whose main focus was the FTP connection and basic file uploading.
+
+### 1. Dedicated transfer service
+
+Transfer processing was moved out of the main screen into `TransferService`. This makes it possible to:
+
+- keep uploads active while the application is minimized;
+- display a progress notification;
+- separate the user interface from the network logic;
+- reconnect without depending directly on the Activity lifecycle.
+
+### 2. Multiple-game queue
+
+Previous versions were more limited to one transfer at a time. Version 9.1 adds a queue that accepts multiple games and uploads each one automatically after the previous transfer is completed.
+
+### 3. Pause, resume, and cancel
+
+New controls were added to:
+
+- pause reading of the current file;
+- resume the upload from where it stopped;
+- cancel the active transfer;
+- clear games that are still waiting in the queue.
+
+### 4. More resilient automatic reconnection
+
+Transfers now handle unstable Wi-Fi networks and Xbox connection drops more reliably. The application:
+
+- preserves the current file/task index;
+- reconnects to the FTP server;
+- continues from the failed task;
+- limits the number of attempts;
+- displays the reconnection counter in the interface.
+
+### 5. Remote Aurora restart
+
+Version 9.1 can remotely restart Aurora when it stops responding during a transfer. The user can authorize the action manually or enable automatic mode.
+
+### 6. Smart file verification
+
+Before uploading a file, the application checks the existing file size on the Xbox. If the remote size matches the local size, the upload is skipped. This avoids unnecessary transfers after an interruption or when repeating an operation.
+
+### 7. Expanded GOD, XEX, and XBLA support
+
+Recognition is no longer focused only on XEX folders. The library now differentiates between:
+
+- XEX;
+- GOD;
+- XBLA/Arcade;
+- STFS packages with `CON `, `PIRS`, and `LIVE` headers.
+
+STFS headers can also be read over FTP to catalog XBLA games without downloading the entire package to the phone.
+
+### 8. New installed-game library
+
+A dedicated screen was added to scan games installed on the Xbox. It uses `GameDatabase`, `GameCache`, `GameAdapter`, and `MeusJogosFragment` to build a browsable library.
+
+### 9. Size calculation and extra content
+
+Version 9.1 calculates the following separately:
+
+- main game size;
+- DLC;
+- public and profile saves;
+- Title Updates.
+
+Users can also list this content before uninstalling a game.
+
+### 10. Remote uninstall
+
+FTP-based deletion management was added with two options:
+
+- remove only the game;
+- remove the game, DLC, saves, and Title Updates.
+
+### 11. Catalog and image cache
+
+The library saves scan results by IP address and caches cover art. This reduces opening time and the number of network requests.
+
+### 12. Interface and internationalization
+
+The interface was expanded with:
+
+- a game-library screen;
+- details dialogs;
+- FTP and Aurora configuration;
+- an initial tutorial;
+- credits;
+- pause, resume, and cancel buttons;
+- responsive layouts for larger screens;
+- multiple language support;
+- light and dark themes.
+
+### 13. Updated Android toolchain
+
+The current project uses:
+
+- Android Gradle Plugin 8.11.0;
+- Gradle 8.13;
+- Java 17;
+- `compileSdk 36`;
+- `targetSdk 36`;
+- `minSdk 24`;
+- View Binding;
+- AndroidX DocumentFile, RecyclerView, CardView, and Material Components.
+
+## Summary comparison
+
+| Area | Previous versions | Xbox FTP Transfer 9.1 |
+|---|---|---|
+| Transfer | Basic FTP upload | Dedicated service with queue and foreground service |
+| Games | Simpler workflow | XEX, GOD, STFS, and XBLA |
+| Execution | More dependent on the screen remaining open | Continues in the background with a notification |
+| Network failures | Limited recovery | Automatic reconnection with an attempt limit |
+| Controls | Start transfer | Start, pause, resume, and cancel |
+| Existing files | Could be uploaded again | Remote-size verification |
+| Aurora | No integrated automation | Optional remote restart |
+| Library | Not available or limited | Remote catalog of installed games |
+| Identification | Folder/file name | Title ID, local database, and STFS/XEX headers |
+| XBLA | No dedicated cataloging | Detection in `000D0000` and `000D0001` |
+| Extra content | Not detailed | DLC, saves, and Title Updates |
+| Uninstall | Not available | Remove games or extra content over FTP |
+| Cache | Limited | IP-based catalog cache and cover cache |
+| Interface | Transfer screen | Transfers, library, details, settings, and tutorial |
+| Languages | More limited | Multiple translation files included |
+
+## Requirements
+
+### Xbox 360
+
+- Xbox 360 with RGH/JTAG or a compatible configuration;
+- Aurora, XeXMenu, or another active FTP server;
+- an IP address reachable over the local network;
+- configured FTP username, password, and port;
+- enough free space on the selected destination.
+
+### Android
+
+- Android 7.0 or higher, due to `minSdk 24`;
+- connection to the same network as the Xbox;
+- notification permission on Android 13 or higher;
+- disabling battery optimization for the application is recommended for long transfers.
+
+## How to use
+
+1. Start the FTP server on the Xbox.
+2. Note the IP address shown by Aurora or XeXMenu.
+3. Open Xbox FTP Transfer.
+4. Enter the Xbox IP address.
+5. Tap **Test Connection**.
+6. Configure the username, password, and port if they differ from the defaults.
+7. Select `Hdd1`, `Usb0`, or `Usb1`.
+8. Tap **Select Folder**.
+9. Choose the game's root folder in Android storage.
+10. If the content is XEX, choose the `Games` or `Apps` destination.
+11. Monitor the upload on the screen or through the notification.
+12. To browse installed games, open **My Games** and tap **Scan Xbox**.
+
+## Building with Android Studio
+
+The project is an Android Gradle project with an `app` module.
+
+### Prerequisites
+
+- up-to-date Android Studio;
+- JDK 17;
+- Android SDK Platform 36;
+- compatible Build-Tools;
+- internet access to download Gradle dependencies.
+
+### Opening the project
+
+1. Extract the project.
+2. In Android Studio, open the folder containing `settings.gradle`.
+3. Do not open only the `app` folder.
+4. Configure Gradle to use JDK 17.
+5. Install API 36 through the SDK Manager.
+6. Sync the project.
+7. Run **Build > Make Project**.
+
+Build from the terminal:
+
+```bash
+chmod +x gradlew
+./gradlew :app:assembleDebug
+```
+
+The debug APK will be generated at:
+
+```text
+app/build/outputs/apk/debug/app-debug.apk
+```
+
+## Security and limitations
+
+- FTP and HTTP may transmit credentials without encryption, depending on the Xbox and Aurora configuration.
+- Credentials are stored in the application's preferences and should be protected in future versions.
+- The remote-restart feature depends on Aurora's HTML structure and web API.
+- The current queue is kept in memory; if Android terminates the process, the queue may be lost.
+- Uninstalling removes files permanently from the Xbox.
+- Covers and game names may depend on external services.
+- The project should be tested with a backup before using remote deletion.
+
+## Project status
+
+- **Application version:** 9.1
+- **Version code:** 9
+- **Platform:** Android
+- **Language:** Java/XML
+- **License:** define a license before publishing the repository
+- **Status:** development/experimental use
+
+The received ZIP file is named `meuXboxin_10.3.zip`, but Gradle declares `versionName "9.1"` and `versionCode 9`. It is recommended to align the file name, Gradle version, changelog, and Git tags before publishing.
+
+## Contributing
+
+Contributions are welcome. Before opening a pull request:
+
+1. test the connection with a real Xbox;
+2. validate XEX, GOD, and XBLA transfers;
+3. test an unstable network;
+4. test pause, resume, and cancel;
+5. do not include `local.properties`, APKs, passwords, or personal data;
+6. document any change to the FTP protocol or Aurora behavior.
+
+## Credits
+
+- **Developer:** Matheus Andrade
+- **Title ID and icon database:** XboxUnity.net
+- **Cover database:** Archive.org
+- **Support tools:** Gemini AI and Claude
+- **Original development environment:** AndroidIDE/Code On The Go
+-->
 [⬅️ Voltar para o início](README.md)
 ## ⚙️ How does Xbox-FTP-Transfer work?
 
